@@ -18,6 +18,19 @@
 
 ## インストール
 
+入れ方は2通りあります。どちらも中身は同じです。
+
+### A. exe 版（かんたん）
+
+1. [Releases](https://github.com/keita-lib/aris-transcribe/releases/latest) から zip をダウンロードします
+   - NVIDIA の GPU がある PC：`aris-transcribe-<version>-windows-gpu.zip`（約630MB）
+   - それ以外の PC：`aris-transcribe-<version>-windows-cpu.zip`（約100MB）
+2. 好きな場所に展開して、`aris-transcribe\aris-transcribe.exe` をダブルクリックします
+
+署名の無い exe のため、初回は Windows の「PC が保護されました」という警告が出ることがあります。「詳細情報」→「実行」で起動できます。exe 版には、右クリックの「送る」メニューとコマンド版（`aris-transcribe-cli`）は付きません。必要なら B の方法で入れてください。
+
+### B. コマンド1行（PowerShell）
+
 PowerShell を開いて、次の1行を実行します。
 
 ```powershell
