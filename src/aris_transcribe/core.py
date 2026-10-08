@@ -188,7 +188,11 @@ def write_outputs(r: Result, formats=FORMATS, out_dir: str | None = None) -> lis
     written = []
     for fmt in formats:
         out = os.path.join(folder, f"{base}.{fmt}")
-        with open(out, "w", encoding="utf-8", newline="\n") as f:
+        # .srt / .txt は BOM 付き UTF-8 + CRLF。BOM が無いと日本語版 Windows のプレイヤーや
+        # メモ帳以外のアプリが Shift_JIS と誤判定して文字化けする。.md は BOM を嫌うツールが多いので付けない
+        windows_text = fmt in ("srt", "txt")
+        enc, nl = ("utf-8-sig", "\r\n") if windows_text else ("utf-8", "\n")
+        with open(out, "w", encoding=enc, newline=nl) as f:
             f.write(WRITERS[fmt](r))
         written.append(out)
     return written

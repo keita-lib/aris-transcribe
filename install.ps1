@@ -25,7 +25,8 @@ Write-Host ("GPU: " + $(if ($hasNvidia) { "NVIDIA あり → GPU 版（large-v3�
 Get-Process aris-transcribe -ErrorAction SilentlyContinue | Stop-Process -Force
 
 Write-Host "$AppName をインストールしています（数分かかることがあります）..."
-uv tool install --python 3.12 --force $spec
+# 同じバージョン番号のまま中身が変わった場合も、キャッシュを使わず本体を作り直す
+uv tool install --python 3.12 --force --reinstall-package aris-transcribe $spec
 if ($LASTEXITCODE -ne 0) { throw "インストールに失敗しました" }
 
 $bin = (uv tool dir --bin).Trim()
